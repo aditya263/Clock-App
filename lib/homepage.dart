@@ -30,7 +30,8 @@ class _HomePageState extends State<HomePage> {
                   onPressed: () {},
                   child: Column(
                     children: [
-                      FlutterLogo(),
+                      Image.asset('assets/clock_icon.png'),
+                      SizedBox(height: 16),
                       Text(
                         'Clock',
                         style: TextStyle(color: Colors.white, fontSize: 14),

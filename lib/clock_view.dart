@@ -1,11 +1,12 @@
 import 'dart:async';
 import 'dart:math';
-
 import 'package:clock_app/constants/theme_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ClockView extends StatefulWidget {
+  const ClockView({Key? key}) : super(key: key);
+
   @override
   State<ClockView> createState() => _ClockViewState();
 }
@@ -13,7 +14,7 @@ class ClockView extends StatefulWidget {
 class _ClockViewState extends State<ClockView> {
   @override
   void initState() {
-    Timer.periodic(Duration(seconds: 1), (timer) {
+    Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {});
     });
     super.initState();
