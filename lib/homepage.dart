@@ -26,18 +26,10 @@ class _HomePageState extends State<HomePage> {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FlatButton(
-                  onPressed: () {},
-                  child: Column(
-                    children: [
-                      Image.asset('assets/clock_icon.png'),
-                      SizedBox(height: 16),
-                      Text(
-                        'Clock',
-                        style: TextStyle(color: Colors.white, fontSize: 14),
-                      )
-                    ],
-                  ))
+              buildMenuButton('Clock', 'assets/images/clock_icon.png'),
+              buildMenuButton('Alarm', 'assets/images/alarm_icon.png'),
+              buildMenuButton('Timer', 'assets/images/timer_icon.png'),
+              buildMenuButton('Stopwatch', 'assets/images/stopwatch_icon.png'),
             ],
           ),
           VerticalDivider(color: Colors.white54, width: 1),
@@ -49,21 +41,33 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   const Text(
                     "Clock",
-                    style: TextStyle(color: Colors.white, fontSize: 24),
+                    style: TextStyle(
+                        fontFamily: 'avenir',
+                        color: Colors.white,
+                        fontSize: 24),
                   ),
                   const SizedBox(height: 32),
                   Text(
                     formattedTime,
-                    style: const TextStyle(color: Colors.white, fontSize: 64),
+                    style: const TextStyle(
+                        fontFamily: 'avenir',
+                        color: Colors.white,
+                        fontSize: 64),
                   ),
                   Text(
                     formattedDate,
-                    style: const TextStyle(color: Colors.white, fontSize: 20),
+                    style: const TextStyle(
+                        fontFamily: 'avenir',
+                        color: Colors.white,
+                        fontSize: 20),
                   ),
                   ClockView(),
                   const Text(
                     "Timezone",
-                    style: TextStyle(color: Colors.white, fontSize: 24),
+                    style: TextStyle(
+                        fontFamily: 'avenir',
+                        color: Colors.white,
+                        fontSize: 24),
                   ),
                   const SizedBox(height: 16),
                   Row(
@@ -72,8 +76,10 @@ class _HomePageState extends State<HomePage> {
                       const SizedBox(width: 16),
                       Text(
                         "UTC" + offsetSign + timezoneString,
-                        style:
-                            const TextStyle(color: Colors.white, fontSize: 14),
+                        style: const TextStyle(
+                            fontFamily: 'avenir',
+                            color: Colors.white,
+                            fontSize: 14),
                       ),
                     ],
                   )
@@ -82,6 +88,29 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Padding buildMenuButton(String title, String image) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 16.0),
+      child: FlatButton(
+        onPressed: () {},
+        child: Column(
+          children: [
+            Image.asset(
+              image,
+              scale: 1.5,
+            ),
+            SizedBox(height: 16),
+            Text(
+              title,
+              style: TextStyle(
+                  fontFamily: 'avenir', color: Colors.white, fontSize: 14),
+            )
+          ],
+        ),
       ),
     );
   }
