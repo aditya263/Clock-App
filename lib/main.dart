@@ -1,13 +1,14 @@
+import 'package:clock_app/enums.dart';
+import 'package:clock_app/models/menu_info.dart';
 import 'package:flutter/material.dart';
-import 'homepage.dart';
+import 'package:provider/provider.dart';
+import 'views/homepage.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomePage(),
+      home: ChangeNotifierProvider<MenuInfo>(
+        create: (context) => MenuInfo(MenuType.clock, imageSource: '', title: ''),
+        child: HomePage(),
+      ),
     );
   }
 }
