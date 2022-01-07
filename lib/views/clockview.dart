@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:math';
+
 import 'package:clock_app/constants/theme_data.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ClockView extends StatefulWidget {
@@ -10,27 +10,38 @@ class ClockView extends StatefulWidget {
   const ClockView({Key? key, required this.size}) : super(key: key);
 
   @override
-  State<ClockView> createState() => _ClockViewState();
+  _ClockViewState createState() => _ClockViewState();
 }
 
 class _ClockViewState extends State<ClockView> {
+  late Timer timer;
+
   @override
   void initState() {
-    Timer.periodic(const Duration(seconds: 1), (timer) {
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {});
     });
     super.initState();
   }
 
   @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      width: widget.size,
-      height: widget.size,
-      child: Transform.rotate(
-        angle: -pi / 2,
-        child: CustomPaint(
-          painter: ClockPainter(),
+    return Align(
+      alignment: Alignment.topCenter,
+      child: SizedBox(
+        width: widget.size,
+        height: widget.size,
+        child: Transform.rotate(
+          angle: -pi / 2,
+          child: CustomPaint(
+            painter: ClockPainter(),
+          ),
         ),
       ),
     );
@@ -40,8 +51,9 @@ class _ClockViewState extends State<ClockView> {
 class ClockPainter extends CustomPainter {
   var dateTime = DateTime.now();
 
-  //60 sec - 360, 1 sec - 6 degree
-  //12 hours - 360, 1 hour - 30 degrees, 1 min - 0.5 degrees
+  //60sec - 360, 1 sec - 6degrees
+  //60min - 360, 1 min - 6degrees
+  //12hours - 360, 1 hour - 30degrees, 60min - 30degrees, 1 min - 0.5degrees
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -122,7 +134,7 @@ class ClockPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+  bool shouldRepaint(CustomPainter oldDelegate) {
     return true;
   }
 }
