@@ -6,7 +6,11 @@ import 'package:clock_app/views/clock_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'alarm_page.dart';
+
 class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -34,7 +38,7 @@ class _HomePageState extends State<HomePage> {
                 if (value.menuType == MenuType.clock) {
                   return const ClockPage();
                 } else if (value.menuType == MenuType.alarm) {
-                  return Container();
+                  return AlarmPage();
                 } else {
                   return RichText(
                     text: TextSpan(
@@ -63,7 +67,7 @@ class _HomePageState extends State<HomePage> {
         return FlatButton(
           shape: const RoundedRectangleBorder(
               borderRadius:
-                  const BorderRadius.only(topRight: Radius.circular(32))),
+                  BorderRadius.only(topRight: Radius.circular(32))),
           padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 0),
           color: currentMenuInfo.menuType == value.menuType
               ? CustomColors.menuBackgroundColor
