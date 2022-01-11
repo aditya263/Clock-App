@@ -12,17 +12,17 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   var initializationSettingsAndroid =
-  AndroidInitializationSettings('codex_logo');
+  const AndroidInitializationSettings('codex_logo');
   var initializationSettingsIOS = IOSInitializationSettings(
       requestAlertPermission: true,
       requestBadgePermission: true,
       requestSoundPermission: true,
       onDidReceiveLocalNotification:
-          (int id, String title, String body, String payload) async {});
+          (int? id, String? title, String? body, String? payload) async {});
   var initializationSettings = InitializationSettings(
-      initializationSettingsAndroid, initializationSettingsIOS);
+      android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
   await flutterLocalNotificationsPlugin.initialize(initializationSettings,
-      onSelectNotification: (String payload) async {
+      onSelectNotification: (String? payload) async {
         if (payload != null) {
           debugPrint('notification payload: ' + payload);
         }
@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
       ),
       home: ChangeNotifierProvider<MenuInfo>(
         create: (context) => MenuInfo(MenuType.clock, title: '', imageSource: ''),
-        child: HomePage(),
+        child: const HomePage(),
       ),
     );
   }
