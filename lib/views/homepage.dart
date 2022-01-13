@@ -2,11 +2,10 @@ import 'package:clock_app/constants/theme_data.dart';
 import 'package:clock_app/data.dart';
 import 'package:clock_app/enums.dart';
 import 'package:clock_app/models/menu_info.dart';
+import 'package:clock_app/views/alarm_page.dart';
 import 'package:clock_app/views/clock_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'alarm_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -25,7 +24,7 @@ class _HomePageState extends State<HomePage> {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: menuItems
-                .map((currentMenuInfo) => buildMenuButton(currentMenuInfo))
+                .map((currentMenuInfo) => buildMenuButton(currentMenuInfo,context))
                 .toList(),
           ),
           VerticalDivider(
@@ -36,9 +35,9 @@ class _HomePageState extends State<HomePage> {
             child: Consumer<MenuInfo>(
               builder: (context, value, child) {
                 if (value.menuType == MenuType.clock) {
-                  return const ClockPage();
+                  return ClockPage();
                 } else if (value.menuType == MenuType.alarm) {
-                  return AlarmPage();
+                  return const AlarmPage();
                 } else {
                   return RichText(
                     text: TextSpan(
@@ -61,13 +60,12 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget buildMenuButton(MenuInfo currentMenuInfo) {
+  Widget buildMenuButton(MenuInfo currentMenuInfo,BuildContext context) {
     return Consumer<MenuInfo>(
       builder: (context, value, child) {
         return FlatButton(
           shape: const RoundedRectangleBorder(
-              borderRadius:
-                  BorderRadius.only(topRight: Radius.circular(32))),
+              borderRadius: BorderRadius.only(topRight: Radius.circular(32))),
           padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 0),
           color: currentMenuInfo.menuType == value.menuType
               ? CustomColors.menuBackgroundColor

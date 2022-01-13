@@ -1,15 +1,12 @@
 import 'dart:async';
 
 import 'package:clock_app/constants/theme_data.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import 'clockview.dart';
 
 class ClockPage extends StatefulWidget {
-  const ClockPage({Key? key}) : super(key: key);
-
   @override
   _ClockPageState createState() => _ClockPageState();
 }
@@ -25,7 +22,7 @@ class _ClockPageState extends State<ClockPage> {
     if (!timezoneString.startsWith('-')) offsetSign = '+';
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 64),
+      padding: EdgeInsets.symmetric(horizontal: 32, vertical: 64),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -46,7 +43,7 @@ class _ClockPageState extends State<ClockPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                const DigitalClockWidget(),
+                DigitalClockWidget(),
                 Text(
                   formattedDate,
                   style: TextStyle(
@@ -82,14 +79,14 @@ class _ClockPageState extends State<ClockPage> {
                       color: CustomColors.primaryTextColor,
                       fontSize: 24),
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
                 Row(
                   children: <Widget>[
                     Icon(
                       Icons.language,
                       color: CustomColors.primaryTextColor,
                     ),
-                    const SizedBox(width: 16),
+                    SizedBox(width: 16),
                     Text(
                       'UTC' + offsetSign + timezoneString,
                       style: TextStyle(
@@ -112,7 +109,6 @@ class DigitalClockWidget extends StatefulWidget {
   const DigitalClockWidget({
     Key? key,
   }) : super(key: key);
-
   @override
   State<StatefulWidget> createState() {
     return DigitalClockWidgetState();
@@ -121,34 +117,22 @@ class DigitalClockWidget extends StatefulWidget {
 
 class DigitalClockWidgetState extends State<DigitalClockWidget> {
   var formattedTime = DateFormat('HH:mm').format(DateTime.now());
-  late Timer timer;
-
   @override
   void initState() {
-    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      var perviousMinute =
-          DateTime.now().add(const Duration(seconds: -1)).minute;
+    Timer.periodic(Duration(seconds: 1), (timer) {
+      var perviousMinute = DateTime.now().add(Duration(seconds: -1)).minute;
       var currentMinute = DateTime.now().minute;
-      if (perviousMinute != currentMinute) {
+      if (perviousMinute != currentMinute)
         setState(() {
           formattedTime = DateFormat('HH:mm').format(DateTime.now());
         });
-      }
     });
     super.initState();
   }
 
   @override
-  void dispose() {
-    timer.cancel();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    if (kDebugMode) {
-      print('=====>digital clock updated');
-    }
+    print('=====>digital clock updated');
     return Text(
       formattedTime,
       style: TextStyle(

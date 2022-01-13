@@ -3,6 +3,7 @@ import 'package:clock_app/models/menu_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
+import 'enums.dart';
 import 'views/homepage.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -27,10 +28,12 @@ void main() async {
           debugPrint('notification payload: ' + payload);
         }
       });
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -41,7 +44,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: ChangeNotifierProvider<MenuInfo>(
-        create: (context) => MenuInfo(MenuType.clock, title: '', imageSource: ''),
+        create: (context) => MenuInfo(MenuType.clock, imageSource: '', title: ''),
         child: const HomePage(),
       ),
     );

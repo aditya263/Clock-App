@@ -1,6 +1,4 @@
-import 'dart:async';
 import 'dart:math';
-
 import 'package:clock_app/constants/theme_data.dart';
 import 'package:flutter/material.dart';
 
@@ -14,27 +12,19 @@ class ClockView extends StatefulWidget {
 }
 
 class _ClockViewState extends State<ClockView> {
-  late Timer timer;
-
   @override
   void initState() {
-    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      setState(() {});
-    });
+    // Timer.periodic(Duration(seconds: 1), (timer) {
+    //   setState(() {});
+    // });
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    timer.cancel();
-    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.topCenter,
-      child: SizedBox(
+      child: Container(
         width: widget.size,
         height: widget.size,
         child: Transform.rotate(
