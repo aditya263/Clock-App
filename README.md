@@ -1,6 +1,9 @@
-# clock_app
+# Flutter Clock App
 
-A new Flutter project.
+Minimal UI | Modern Theme | Full Functional
+
+# Screenshots
+![](assets/flutter_clock_app.png)
 
 ## Getting Started
 
