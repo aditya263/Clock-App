@@ -2,7 +2,7 @@
 
 Minimal UI | Modern Theme | Full Functional
 
-# Screenshots
+# ✌ Preview
 ![](assets/flutter_clock_app.png)
 
 ## Getting Started
